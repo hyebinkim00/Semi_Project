@@ -1,10 +1,9 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="dto.Product"%>
-<%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="dbconn.jsp"%>
+<%@page import="java.sql.ResultSet"%><%@page
+	import="java.sql.PreparedStatement"%>
+<%@page import="java.util.List"%><%@page import="java.util.ArrayList"%>
+<%@page import="dto.Product"%><%@ page
+	contentType="text/html; charset=UTF-8"%>
+<%@ include file="dbconn.jsp"%>
 <%
 	//파라미터로 넘어온 id값으로
 String id = request.getParameter("id");
@@ -13,7 +12,7 @@ if (id == null || id.trim().equals("")) {//id값이 넘오지않았으면 상품
 	response.sendRedirect("products.jsp");
 	return;
 }
-String sql = "select * from ttproduct where p_id=?";
+String sql = "select * from product where p_id=?";
 //id값이 존재하면 상품처리 객체생성
 PreparedStatement pstmt = con.prepareStatement(sql);
 pstmt.setString(1, id);
@@ -33,7 +32,7 @@ if (rs.next()) {
 }
 //해당id에 맞는 상품정보 얻기
 if (product == null) {//해당id로 상품 존재하지않으면 에러페이지로 이동.
-	response.sendRedirect("exception/noProductId.jsp");
+	response.sendRedirect("exceptionNoProductId.jsp");
 	return;
 }
 
@@ -69,3 +68,13 @@ if (list == null) {
 //상세페이지로 이동시 원래 상품 정보출력
 response.sendRedirect("product.jsp?id=" + id);
 %>
+
+
+
+
+
+
+
+
+
+

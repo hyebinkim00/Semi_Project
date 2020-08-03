@@ -4,10 +4,14 @@
 <%@page import="dto.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="java.net.URLDecoder"%>
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("UTF-8");
-String cartId = (String) session.getAttribute("sessionId");
+	request.setCharacterEncoding("utf-8");
+
+/* String cartId = session.getId(); */
+	String cartId = (String)session.getAttribute("sessionId");
+
 String shipping_cartId = "";
 String shipping_name = "";
 String shipping_shippingDate = "";
@@ -22,17 +26,17 @@ if (cookies != null) {
 		Cookie thisCookie = cookies[i];
 		String n = thisCookie.getName();
 		if (n.equals("Shipping_cartId")) {
-	shipping_cartId = URLDecoder.decode(thisCookie.getValue(), "UTF-8");
+	shipping_cartId = URLDecoder.decode(thisCookie.getValue(), "utf-8");
 		} else if (n.equals("Shipping_name")) {
-	shipping_name = URLDecoder.decode(thisCookie.getValue(), "UTF-8");
+	shipping_name = URLDecoder.decode(thisCookie.getValue(), "utf-8");
 		} else if (n.equals("Shipping_shippingDate")) {
-	shipping_shippingDate = URLDecoder.decode(thisCookie.getValue(), "UTF-8");
+	shipping_shippingDate = URLDecoder.decode(thisCookie.getValue(), "utf-8");
 		} else if (n.equals("Shipping_country")) {
-	shipping_country = URLDecoder.decode(thisCookie.getValue(), "UTF-8");
+	shipping_country = URLDecoder.decode(thisCookie.getValue(), "utf-8");
 		} else if (n.equals("Shipping_zipCode")) {
-	shipping_zipCode = URLDecoder.decode(thisCookie.getValue(), "UTF-8");
+	shipping_zipCode = URLDecoder.decode(thisCookie.getValue(), "utf-8");
 		} else if (n.equals("Shipping_addressName")) {
-	shipping_addressName = URLDecoder.decode(thisCookie.getValue(), "UTF-8");
+	shipping_addressName = URLDecoder.decode(thisCookie.getValue(), "utf-8");
 		}
 	}
 }
@@ -54,14 +58,12 @@ if (cookies != null) {
 		</div>
 		<div class="row justify-content-between">
 			<div class="col-4" align="left">
-				<strong>배송 주소</strong>
-				<br>
-				<label>성명:<%=shipping_name%></label><br>
-				<label>우편번호 ]:<%=shipping_zipCode%></label><br>
-				<label>주소:<%=shipping_addressName%></label><br>
+				<strong>배송 주소</strong><br> 성명 :<%=shipping_name%><br>
+				우편번호:<%=shipping_zipCode%><br> 주소:<%=shipping_addressName%><br>
 			</div>
 			<div class="col-4" align="right">
-				<p><em>배송일:<%=shipping_shippingDate%></em></p>
+				<p>
+					<em>배송일:<%=shipping_shippingDate%></em>
 			</div>
 		</div>
 		<div>
@@ -102,13 +104,12 @@ if (cookies != null) {
 					<td class="text-center text-danger"><strong><%=new DecimalFormat("#,###").format(sum)%></strong></td>
 				</tr>
 			</table>
-			<form action="purchase.jsp" method="post">
-				<input type="hidden" name="sum" value="<%=sum%>" />
-				<!-- 확정메뉴 -->
-				<a href="./shippingInfo.jsp?cartId=<%=shipping_cartId%>" class="btn btn-secondary" role="button">이전</a>
-				<input type="submit" class="btn btn-success" value="결제" />
-				<a href="./checkOutCancelled.jsp" class="btn btn-secondary" role="button">취소</a>
-			</form>
+			<!-- 확정메뉴 -->
+			<a href="./shippingInfo.jsp?cartId=<%=shipping_cartId%>"
+				class="btn btn-secondary" role="button">이전</a> <a
+				href="./purchase.jsp" class="btn btn-success" role="button">결제</a>
+			<a href="./checkOutCancelled.jsp" class="btn btn-secondary"
+				role="button">취소</a>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />

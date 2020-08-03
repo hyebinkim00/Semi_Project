@@ -2,11 +2,14 @@
 <%@page import="dto.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@include file="dbconn.jsp"%>
 <%
 try {
 con.setAutoCommit(false);
+/* String sql = "";
+PreparedStatement preparedStatement = con.prepareStatement(sql); */
 request.setCharacterEncoding("UTF-8");
 	String price = request.getParameter("price"),
 				 card1 = request.getParameter("cardId1"),
@@ -24,7 +27,7 @@ out.print(price + ", ," + card1 + ", " + card2 + ", " + card3 + ", " + card4 + "
 List<Product> cartList = (List<Product>) session.getAttribute("cartlist");
 if (cartList != null) {
 		for(Product product : cartList) {
-			String sql = "select p_unitsInStock from ttproduct where p_id=?";
+			String sql = "select p_unitsInStock from tt_product where p_id=?";
 			int cartListQtt = product.getQuantity(), productStock = 0;
 			String id = product.getProductId();
 			System.out.print(id);
@@ -40,11 +43,11 @@ if (cartList != null) {
 			out.print("DB<br />");
 			out.print("Stock: " + productStock + "<br />");
 				if (productStock < cartListQtt) {
-					response.sendRedirect("${pageContext.request.contextPath}/purchaseFail.jsp");
+					response.sendRedirect("./exceptionPurchaseFail.jsp");
 				} else {
 					productStock -= cartListQtt;
 					System.out.print(productStock);
-					sql = "update ttproduct set p_unitsInStock=? where p_id=?";
+					sql = "update tt_product set p_unitsInStock=? where p_id=?";
 					preparedStatement = con.prepareStatement(sql);
 					preparedStatement.setInt(1, productStock);
 					preparedStatement.setString(2, id);
@@ -56,7 +59,7 @@ if (cartList != null) {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("thankCustomer.jsp");
 		requestDispatcher.forward(request, response);
 	} else {
-		response.sendRedirect("${pageContext.request.contextPath}/emptyCart.jsp");
+		response.sendRedirect("./exceptionEmptyCart.jsp");
 	}
 } catch (Exception e) {
 		e.printStackTrace();

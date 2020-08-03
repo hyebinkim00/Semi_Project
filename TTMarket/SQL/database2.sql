@@ -18,4 +18,27 @@ select * from sale;
 
 update sale set status=4 where seq=1;
 
+show tables;
+
+desc category;
+select * from category;
+
+
+
+
+
+
+
+
+
+
+
+desc product;
+desc sale;
+
+desc delivery;
+select * from product;
+desc member;
+
+
 

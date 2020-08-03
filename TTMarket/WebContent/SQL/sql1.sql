@@ -70,15 +70,7 @@ select *
    and s.productid=p.p_id;
    
    select p_unitsInStock from where p_id='P1234'
+   
 
-DROP TABLE MEMBER;
-DROP TABLE TTMEMBER;
-DROP TABLE SALE;
-DROP TABLE TTSALE;
-DROP TABLE DELIVERY;
-DROP TABLE TTDELIVERY;
-DROP TABLE PRODUCT;
-DROP TABLE TTPRODUCT;
-DROP TABLE CATEGORY;
-DROP TABLE TTCATEGORY;
+update product set p_unitsInStock=1000 where p_id= 'P1234'
 

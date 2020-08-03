@@ -10,11 +10,10 @@
     <web-resource-collection>
       <web-resource-name>TTMarket</web-resource-name>
       <description></description>
-      <url-pattern>/admin/addProduct.jsp</url-pattern>
-      <url-pattern>/admin/editProduct.jsp</url-pattern>
-      <url-pattern>/admin/addCategory.jsp</url-pattern>
-      <url-pattern>/admin/loginAdmin.jsp</url-pattern>
-      <url-pattern>/admin/deliveryList.jsp</url-pattern>
+      <url-pattern>/addProduct.jsp</url-pattern>
+      <url-pattern>/editProduct.jsp</url-pattern>
+      <url-pattern>/addCategory.jsp</url-pattern>
+      <url-pattern>/loginAdmin.jsp</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <description>권한관리</description>
@@ -24,12 +23,12 @@
   <login-config>
     <auth-method>FORM</auth-method>
     <form-login-config>
-      <form-login-page>/admin/login.jsp</form-login-page>
-      <form-error-page>/admin/login_failed.jsp</form-error-page>
+      <form-login-page>/login.jsp</form-login-page>
+      <form-error-page>/login_failed.jsp</form-error-page>
     </form-login-config>
   </login-config>
   <error-page>
     <error-code>404</error-code>
-    <location>/exception/noPage.jsp</location>
+    <location>/exceptionNoPage.jsp</location>
   </error-page>
 </web-app>
